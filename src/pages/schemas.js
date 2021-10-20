@@ -20,7 +20,7 @@ const SchemasPage = () => {
         </Button>
       </Link>
       <section style={{ display: "flex", flexWrap: "wrap" }}>
-        {schemasList.map((schema) => (
+        {schemasList?.map((schema) => (
           <Card
             style={{
               marginBottom: "1em",
