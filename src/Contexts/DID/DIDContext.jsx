@@ -23,7 +23,7 @@ const useDIDSetup = () => {
 
   const authenticate = async () => {
     setIsLoading(true);
-    const addr = await window.ethereum.enable();
+    const addr = await window.ethereum.request({ method: 'eth_requestAccounts' });
     setAddresses(addr);
     const self = await SelfID.authenticate({
       ceramic: process.env.GATSBY_CERAMIC_NODE,
