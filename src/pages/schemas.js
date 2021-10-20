@@ -10,9 +10,7 @@ const SchemasPage = () => {
     const { schemasList, getSchemas } = useSchema()
 
     useEffect(() => {
-        if (window) {
-            getSchemas()
-        }
+        getSchemas()
     },[])
     return (
         <>

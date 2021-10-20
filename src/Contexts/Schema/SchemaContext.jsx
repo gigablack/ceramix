@@ -1,7 +1,23 @@
 import React, { createContext, useContext } from 'react'
 import { useSchemaState } from './hooks/useSchemaState'
 
-const SchemaContext = createContext()
+const initialState = {
+    setProperties: () => {},
+        setRequired: () => {},
+        handleChangeSchema: () => {},
+        isModalVisible: false,
+        handleCancel: () => {},
+        handleOk: () => {},
+        showModal: () => {},
+        properties: {},
+        schema:{},
+        saveSchema: () => {},
+        getSchemas: () => {},
+        schemasList: []
+    }
+
+
+const SchemaContext = createContext(initialState)
 
 export const useSchema = () => {
     return useContext(SchemaContext)
