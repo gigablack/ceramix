@@ -1,14 +1,14 @@
-import * as React from "react"
-import { Typography } from 'antd'
+import * as React from "react";
+import { Typography } from "antd";
 
-const { Title } = Typography
+const { Title } = Typography;
 // styles
 const IndexPage = () => {
-    return (
-        <>
-        <Title style={{ textAlign: 'center' }}>Community Data Models</Title>
-        </>
-    )
-}
+  return (
+    <>
+      <Title style={{ textAlign: "center" }}>Community Data Models</Title>
+    </>
+  );
+};
 
-export default IndexPage
+export default IndexPage;

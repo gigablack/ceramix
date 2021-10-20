@@ -1,1 +1,12 @@
-{"definitions":{"mySchemas":"kjzl6cwe1jw149j6ikydd88qg0ktx40krouvc5ahsey9ll4kjq20cudx5c45omu","myDataModels":"kjzl6cwe1jw147ynhv75q4skxfwey7raknejaiqscj84ah4vv3sv4vm3qlcc81n","basicProfile":"kjzl6cwe1jw145cjbeko9kil8g9bxszjhyde21ob8epxuxkaon1izyqsu8wgcic"},"schemas":{"ceramixSchema":"ceramic://k3y52l7qbv1frxmkf7gfder37gjenrat7nv0cyg5c2pliek35zjh5txxwsn93uo00","BasicProfile":"ceramic://k3y52l7qbv1frxt706gqfzmq6cbqdkptzk8uudaryhlkf6ly9vx21hqu4r6k1jqio"},"tiles":{}}
+{
+  "definitions": {
+    "mySchemas": "kjzl6cwe1jw149j6ikydd88qg0ktx40krouvc5ahsey9ll4kjq20cudx5c45omu",
+    "myDataModels": "kjzl6cwe1jw147ynhv75q4skxfwey7raknejaiqscj84ah4vv3sv4vm3qlcc81n",
+    "basicProfile": "kjzl6cwe1jw145cjbeko9kil8g9bxszjhyde21ob8epxuxkaon1izyqsu8wgcic"
+  },
+  "schemas": {
+    "ceramixSchema": "ceramic://k3y52l7qbv1frxmkf7gfder37gjenrat7nv0cyg5c2pliek35zjh5txxwsn93uo00",
+    "BasicProfile": "ceramic://k3y52l7qbv1frxt706gqfzmq6cbqdkptzk8uudaryhlkf6ly9vx21hqu4r6k1jqio"
+  },
+  "tiles": {}
+}
