@@ -26,7 +26,7 @@ const useDIDSetup = () => {
         const addr = await window.ethereum.enable()
         setAddresses(addr)
         const self = await SelfID.authenticate({
-            ceramic: 'local',
+            ceramic: process.env.GATSBY_CERAMIC_NODE,
             authProvider: new EthereumAuthProvider(window.ethereum, addr[0]),
             connectNetwork: 'testnet-clay'
         })
@@ -40,7 +40,7 @@ const useDIDSetup = () => {
             resolver: getResolver()
         })
         await did.authenticate()
-        const app = new CeramicClient('http://localhost:7007')
+        const app = new CeramicClient(process.env.GATSBY_CERAMIC_NODE)
         app.did = did
         setAppClient(app)
         const manager = new ModelManager(app)
