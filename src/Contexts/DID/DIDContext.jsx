@@ -16,7 +16,7 @@ const useDIDSetup = () => {
   const [selfID, setSelfID] = useState(null);
   const [addresses, setAddresses] = useState([]);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [profile, setProfile] = useState(null);
+  const [profile, setProfile] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [appClient, setAppClient] = useState(null);
   const [modelManager, setModelManager] = useState(null);
@@ -49,15 +49,12 @@ const useDIDSetup = () => {
     const manager = new ModelManager(app);
     setModelManager(manager);
     setIsLoading(false);
+      setIsAuthenticated(true)
   };
 
   const resetModelManager = () => {
     setModelManager(new ModelManager(appClient));
   };
-
-  useEffect(() => {
-    if (profile) setIsAuthenticated(true);
-  }, [profile]);
 
   return {
     selfID,
