@@ -2,7 +2,7 @@
 
 ## A Descentralized Data Model Index.
 
-[Live Demo](ceramix.ml)
+[Live Demo](https://ceramix.ml)
 
 ### How to use.
 
