@@ -1,11 +1,14 @@
 import React, { useEffect } from "react";
 import { Link } from "gatsby";
-import { Typography, Button, Card } from "antd";
+import { Typography, Button } from "antd";
 import { useSchema } from "../Contexts/Schema/SchemaContext";
+import DataModelCard from "../components/DataModelCard/DataModelCard";
+import { useRedirect } from "../hooks/useRedirect";
 
 const { Title } = Typography;
 
 const DataModelsPage = () => {
+  useRedirect();
   const { modelsList, getModels } = useSchema();
   useEffect(() => {
     getModels();
@@ -20,15 +23,7 @@ const DataModelsPage = () => {
       </Link>
       <section style={{ display: "flex", flexWrap: "wrap" }}>
         {modelsList?.map((model) => (
-          <Card
-            style={{ width: 500, margin: "auto" }}
-            key={model.streamID}
-            title={model.title}
-            extra={<Link to={`/app/models/${model.streamID}`}>View JSON</Link>}
-          >
-            <p>{model.description}</p>
-            <Title level={5}>{model.date}</Title>
-          </Card>
+          <DataModelCard key={model.streamID} model={model} />
         ))}
       </section>
     </>

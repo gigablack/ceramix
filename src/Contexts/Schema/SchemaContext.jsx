@@ -14,11 +14,11 @@ const initialState = {
   saveSchema: () => {},
   getSchemas: () => {},
   schemasList: [],
-    modelsList: [],
-    getSchemaByID: () => {},
-    publishModel: () => {},
-    getModels: () => {},
-    getModelByID: () => {},
+  modelsList: [],
+  getSchemaByID: () => {},
+  publishModel: () => {},
+  getModels: () => {},
+  getModelByID: () => {},
 };
 
 const SchemaContext = createContext(initialState);

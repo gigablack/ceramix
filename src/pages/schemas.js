@@ -2,10 +2,12 @@ import React, { useEffect } from "react";
 import { Typography, Button, Card } from "antd";
 import { Link } from "gatsby";
 import { useSchema } from "../Contexts/Schema/SchemaContext";
+import { useRedirect } from "../hooks/useRedirect";
 
 const { Title } = Typography;
 
 const SchemasPage = () => {
+  useRedirect();
   const { schemasList, getSchemas } = useSchema();
 
   useEffect(() => {

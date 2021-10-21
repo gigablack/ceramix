@@ -1,12 +1,15 @@
 import React, { useEffect } from "react";
 import { Typography, Form, Button, Divider, Input, Select } from "antd";
 import { useSchema } from "../Contexts/Schema/SchemaContext";
+import { useRedirect } from "../hooks/useRedirect";
 
 const { Title } = Typography;
 
 const NewDataModel = () => {
+  useRedirect();
   const [form] = Form.useForm();
-  const { schemasList, getSchemas, publishModel } = useSchema();
+  const { schemasList, getSchemas, publishModel, publishingModel } =
+    useSchema();
   useEffect(() => {
     getSchemas();
   }, []);
@@ -53,7 +56,7 @@ const NewDataModel = () => {
         >
           <Input />
         </Form.Item>
-        <Button type="primary" htmlType="submit">
+        <Button type="primary" htmlType="submit" loading={publishingModel}>
           Publish Data Model
         </Button>
       </Form>

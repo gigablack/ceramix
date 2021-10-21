@@ -4,9 +4,9 @@ import { Link } from "gatsby";
 import {
   MenuUnfoldOutlined,
   MenuFoldOutlined,
-  UserOutlined,
-  VideoCameraOutlined,
-  UploadOutlined,
+  ExceptionOutlined,
+  FileDoneOutlined,
+  FileSyncOutlined,
 } from "@ant-design/icons";
 import "./layout.css";
 import { useDID } from "../../Contexts/DID/DIDContext";
@@ -27,15 +27,19 @@ const SiderDemo = ({ children }) => {
       <Sider trigger={null} collapsible collapsed={collapsed}>
         <div className="logo" />
         <Menu theme="dark" mode="inline" defaultSelectedKeys={["1"]}>
-          <Menu.Item key="1" icon={<UserOutlined />}>
+          <Menu.Item key="1" icon={<FileSyncOutlined />}>
             <Link to="/">Community Data Models</Link>
           </Menu.Item>
-          <Menu.Item key="2" icon={<VideoCameraOutlined />}>
-            <Link to="/data-models">My Data Models</Link>
-          </Menu.Item>
-          <Menu.Item key="3" icon={<UploadOutlined />}>
-            <Link to="/schemas">My Schemas</Link>
-          </Menu.Item>
+          {isAuthenticated && (
+            <Menu.Item key="2" icon={<FileDoneOutlined />}>
+              <Link to="/data-models">My Data Models</Link>
+            </Menu.Item>
+          )}
+          {isAuthenticated && (
+            <Menu.Item key="3" icon={<ExceptionOutlined />}>
+              <Link to="/schemas">My Schemas</Link>
+            </Menu.Item>
+          )}
         </Menu>
       </Sider>
       <Layout className="site-layout">

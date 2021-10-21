@@ -3,7 +3,7 @@ import { Typography, Form, Input, Divider, Button } from "antd";
 import Property from "../components/Property/Property";
 import { useSchema } from "../Contexts/Schema/SchemaContext";
 import AddProperty from "../components/AddProperty/AddProperty";
-import { useDID } from "../Contexts/DID/DIDContext";
+import { useRedirect } from "../hooks/useRedirect";
 
 const { Title } = Typography;
 
@@ -20,6 +20,7 @@ const propTypes = {
 };
 
 const NewSchemaPage = () => {
+  useRedirect();
   const [form] = Form.useForm();
   const {
     handleChangeSchema,
@@ -29,6 +30,7 @@ const NewSchemaPage = () => {
     handleOk,
     showModal,
     properties,
+    savingSchema,
   } = useSchema();
   return (
     <>
@@ -61,8 +63,8 @@ const NewSchemaPage = () => {
           handleCancel={handleCancel}
         />
         <Divider></Divider>
-        <Button type="primary" htmlType="submit">
-          Publish Schema
+        <Button type="primary" htmlType="submit" loading={savingSchema}>
+          Save Schema
         </Button>
       </Form>
     </>

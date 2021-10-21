@@ -14,11 +14,16 @@ export const useSchemaState = () => {
   const [required, setRequired] = useState([]);
   const [schema, setSchema] = useState(baseSchema);
   const [isModalVisible, setIsModalVisible] = useState(false);
-  const { selfID, modelManager, isAuthenticated, resetModelManager } = useDID();
+  const { selfID, modelManager, isAuthenticated, resetModelManager, appDID } =
+    useDID();
   const [schemasList, setSchemasList] = useState([]);
   const [modelsList, setModelsList] = useState([]);
+  const [appModelsList, setAppModelsList] = useState([]);
+  const [savingSchema, setSavingSchema] = useState(false);
+  const [publishingModel, setPublishingModel] = useState(false);
 
   const saveSchema = async () => {
+    setSavingSchema(true);
     const schemaID = await modelManager.createSchema(schema.title, schema);
     let mySchemas = await selfID.get("mySchemas");
     if (!mySchemas) {
@@ -33,6 +38,7 @@ export const useSchemaState = () => {
     });
     await selfID.set("mySchemas", mySchemas);
     setSchema(baseSchema);
+    setSavingSchema(false);
     navigate("/schemas");
   };
   const getSchemas = async () => {
@@ -53,45 +59,60 @@ export const useSchemaState = () => {
   };
   const getModelByID = async (streamID) => {
     if (isAuthenticated) {
-      let stream = await selfID.ceramic.loadStream(streamID);
-      return stream;
+      return await selfID.ceramic.loadStream(streamID);
+    } else {
+      return await appDID.ceramic.loadStream(streamID);
     }
   };
   const publishModel = async (evt) => {
+    setPublishingModel(true);
     const [title, streamID] = evt.schema.split("-");
-    console.log(title);
-    console.log(streamID);
     let stream = await selfID.ceramic.loadStream(streamID);
-    console.log(
-      await modelManager.usePublishedSchema(title, stream.allCommitIds[0])
-    );
+    await modelManager.usePublishedSchema(title, stream.allCommitIds[0]);
     let schemaURL = modelManager.getSchemaURL(streamID);
-    console.log(schemaURL);
     await modelManager.createDefinition(evt.name, {
       name: evt.name,
       description: evt.description,
       schema: schemaURL,
     });
-    console.log(modelManager);
     const model = await modelManager.toPublished();
-    console.log(model);
     const doc = await TileDocument.create(selfID.ceramic, model);
-    console.log(doc);
     const id = doc.id.toString();
     let datamodels = await selfID.get("myDataModels");
+    let appDataModels = await appDID.get("models");
     if (!datamodels) {
       datamodels = {};
       datamodels.headers = [];
     }
-    datamodels.headers.unshift({
+    if (!appDataModels) {
+      appDataModels = {};
+      appDataModels.headers = [];
+    }
+    const dataModelInfo = {
       title: evt.title,
       streamID: id,
       description: evt.modelDescription,
       date: moment().format("ll"),
-    });
+    };
+    const appDataModelInfo = {
+      ...dataModelInfo,
+      author: selfID.id,
+    };
+    datamodels.headers.unshift(dataModelInfo);
+    appDataModels.headers.unshift(appDataModelInfo);
     await selfID.set("myDataModels", datamodels);
+    await appDID.set("models", appDataModels);
     resetModelManager();
+    setPublishingModel(false);
     navigate("/data-models");
+  };
+  const getAppModels = async () => {
+    let models = await appDID.get("models");
+    if (!models) {
+      models = {};
+      models.headers = [];
+    }
+    setAppModelsList(models.headers);
   };
   const getModels = async () => {
     if (isAuthenticated) {
@@ -148,5 +169,9 @@ export const useSchemaState = () => {
     modelsList,
     getModels,
     getModelByID,
+    getAppModels,
+    appModelsList,
+    savingSchema,
+    publishingModel,
   };
 };
